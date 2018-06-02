@@ -10,5 +10,21 @@
     
 ### Rodando o código
     
+    git clone https://github.com/Andrelpoj/Pinocchio
+    cd Pinocchio/
     swipl
-    ?- consult('dogs.pl').
+
+  Para iniciar os dados:
+
+    ?- consult('pinocchio_puppet.pl').
+  
+  Para carregar os fatos que tornam o pinocchio um menino de verdade:
+    
+    ?- consult('pinocchio_real_boy.pl').
+
+## Integrantes do Grupo
+    - André Luiz Pereira
+    - João Pedro Sá Medeiros
+    - Alysson Gomes
+    - Gustavo Pergola
+    - Nicholas Quintella

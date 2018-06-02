@@ -1,3 +1,5 @@
+% Fatos
+
 age(gepetto,old).
 age(pinocchio,young).
 occupation(gepetto,carpenter).
@@ -10,11 +12,11 @@ fullfilled_wish(fairy,gepetto).
 alive(gepetto).
 alive(pinocchio).
 woman(fairy).
-want(fairy,"if pinocchio was to be a real boy", "he must always be a good boy").
+want(fairy, "if pinocchio was to be a real boy", "he must always be a good boy").
 love(gepetto,pinocchio).
 naughty(pinocchio).
 liar(pinocchio).
-nose_grow(pinocchio,"when he lies").
+nose_grows(pinocchio,"when lying").
 promised(pinocchio,"to be a good boy from the next time","when he lies").
 join(pinocchio,circus).
 misses(pinocchio,gepetto).
@@ -27,12 +29,14 @@ what_when("pinocchio and gepetto slipped out","whale sneezed").
 what_when("pinocchio's nose grows","pinocchio lies").
 reached_home_safely("gepetto").
 reached_home_safely("pinocchio").
-who_what(fairy,"was pleased with pinocchio's bravery").
-who_what(fairy,"fullfilled gepetto's wish").
 who_what_how(pinocchio,"reached home", safely).
 who_what_how(gepetto,"reached home",safely).
-who_what_why(fairy, "turned pinocchio into a real boy", "because she was pleased with pinocchio").
-happy(pinocchio).
-happy(gepetto).
-boy(X):-man(X),age(X,young).
-trust(X):-not(liar(X)).
+
+% Regras
+
+is_puppet(X) :- naughty(X), alive(X), nose_grows(X, "when lying").
+boy(X):- man(X), age(X,young).
+real_boy(X) :- boy(X), not(is_puppet(X)).
+trust(X):- not(liar(X)).
+want(X, Y) :- wish(X, Y).
+where_what(X, Y) :- what_where(Y, X).
