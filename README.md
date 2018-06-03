@@ -16,15 +16,15 @@
 
   Para iniciar os dados:
 
-    ?- consult('pinocchio_puppet.pl').
+    ?- consult('pinocchio.pl').
   
-  Para carregar os fatos que tornam o pinocchio um menino de verdade:
+  Para carregar as regras relacionadas ao tratamento de tempo:
     
-    ?- consult('pinocchio_real_boy.pl').
+    ?- consult('pinocchio_time.pl').
 
 ## Integrantes do Grupo
-    - André Luiz Pereira
-    - João Pedro Sá Medeiros
     - Alysson Gomes
+    - André Luiz Pereira
     - Gustavo Pergola
+    - João Pedro Sá Medeiros
     - Nicholas Quintella
