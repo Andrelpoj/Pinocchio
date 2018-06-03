@@ -1,3 +1,5 @@
+consult('pinocchio_time.pl').
+
 % Facts
 % Entities: pinocchio, gepetto, fairy... 
 
@@ -16,10 +18,9 @@ wish("if pinocchio was to be a real boy he must always be a good boy").
 naughty(pinocchio).
 liar(pinocchio).
 
-
 % Attributes that may change value over time
-alive(gepetto).
-alive(pinocchio).
+alive(gepetto, T):- true, T > 0, !.
+alive(pinocchio, T) :- event("fullfilled gepetto's wish", X), X < T, !.
 happy(gepetto).
 happy(pinocchio).
 pleased(fairy).
@@ -39,7 +40,7 @@ event("act1", 0).
 event("carved pinocchio",1).
 event("wished pinocchio to be a real boy",2).
 event("fullfilled gepetto's wish",3).
-event("nose grows","pinocchio lies"). % how to know when he lies?
+event("nose grows","pinocchio lies"). % como saber quando ele mente?
 event("promises to be a good boy from the next time","pinocchio lies").
 event("act2", 5).
 event("left the school",6).
@@ -54,7 +55,7 @@ event("make a plan",13).
 event("tickle the whale's belly",14).
 event("opened his mouth and snezeed",15).
 event("act4", 16).
-event("slipped out of the whale",17).
+event("slips out of the whale", 17).
 event("reached home safely",18).
 event("turned pinocchio into a real boy",19).
 event("never missed school again",20). %how to represent from now on?
@@ -78,8 +79,8 @@ who(pinocchio,"make a plan").
 who(gepetto,"tickle the whale's belly").
 who(pinocchio,"tickle the whale's belly").
 who(whale,"opened his mouth and snezeed").
-who(pinocchio,"slipped out of the whale").
-who(gepetto,"slipped out of the whale").
+who(pinocchio,"slips out of the whale").
+who(gepetto,"slips out of the whale").
 who(gepetto,"reached home safely").
 who(pinocchio,"reached home safely").
 who(fairy,"turned pinocchio into a real boy").
@@ -89,6 +90,7 @@ who(pinocchio,"never missed school again").
 where(school,"left the school").
 where(circus,"joins a circus").
 where(circus,"missed gepetto").
+where(whale,"found the whale").
 where("whale's belly","make a plan").
 where("whale's belly","tickle the whale's belly").
 where("whale's belly","slipped out of the whale").
@@ -97,6 +99,7 @@ where("whale's belly","slipped out of the whale").
 how(safely,"reached home safely").
 
 % why(why,what).
+why("slips out of the whale", "tickle the whale's belly").
 
 % verb_object(object,what).
 verb_object(pinocchio,"carved pinocchio").
@@ -116,7 +119,6 @@ verb_object(pinocchio,"turned pinocchio in a real boy").
 verb_object(school,"never missed school again").
 
 % Regras
-
 boy(X):- man(X), age(X,young).
 trust(X):- not(liar(X)).
 want(X,Y):- wish(X, Y).
