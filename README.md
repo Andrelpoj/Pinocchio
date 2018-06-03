@@ -1,5 +1,7 @@
 # Pinocchio
 
+Texto base: https://www.bedtimeshortstories.com/pinocchio-story
+
 ## Como executar  
 ### Instalando o SWI  
   http://www.swi-prolog.org/build/unix.html
@@ -16,7 +18,7 @@
 
   Para iniciar os dados:
 
-    ?- consult('pinocchio.pl').
+    ?- consult('pinocchio.pl'). 
 
 ## Integrantes do Grupo
     - Alysson Gomes
