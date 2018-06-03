@@ -69,6 +69,7 @@ who(pinocchio,"nose grows").
 who(pinocchio,"promised to be a good boy from the next time"). 
 who(pinocchio,"left the school").
 who(pinocchio,"joins a circus").
+who("pinocchio's friends", "joins a circus").
 who(pinocchio,"missed gepetto").
 who(whale,"swallow gepetto").
 who(pinocchio,"heard gepetto was swallowed by a whale").

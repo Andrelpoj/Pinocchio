@@ -12,11 +12,13 @@ What happens when pinocchio lies?                   | ?- event(X,”pinocchio li
 Where did pinocchio go?                             | ?- who(pinocchio,Y), where(X,Y).
 Where did pinocchio go with his friends?            | ?- who(pinocchio,Y), who("pinocchio's friends", Y), where(X,Y).
 What has the whale done to pinocchio?               | ?- who(whale,X), verb_object(pinocchio,X).
-How did Geppeto and Pinocchio manage to get out?    | ?- why("slips out of the whale", X), who(geppeto, X), who(pinocchio, X)
+How did Gepetto and Pinocchio manage to get out?    | ?- why("slips out of the whale", X), who(gepetto, X), who(pinocchio, X).
 In the beginning, is pinocchio a good boy?          | ?- good_boy(pinocchio, X), beginning(X).
 In the beginning, is pinocchio trustworthy?         | ?- trust(pinocchio, X), beginning(X).
 In the end, is pinocchio a good boy?                | ?- good_boy(pinocchio, X), end(X).
 In the end, is pinocchio trustworthy?               | ?- trust(pinocchio, X), end(X).
-Were they happy in the beginning?                   | ?- happy(geppeto, beginning), happy(pinocchio, beginning)
-Did they lived happily after?                       | ?- happy(geppeto, end), happy(pinocchio, end)
+Were they happy in the beginning?                   | ?- happy(gepetto, beginning), happy(pinocchio, beginning)
+Did they lived happily after?                       | ?- happy(gepetto, end), happy(pinocchio, end)
 What happenned after pinocchio left school?         | ?- 
+Did the fairy made gepetto happy?
+What did gepetto and pinocchio do together?
