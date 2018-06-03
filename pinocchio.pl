@@ -35,25 +35,29 @@ love(gepetto,pinocchio).
 % Events:
 % event(what, when)
 % The story is a sequence of events.
+event("act1", 0).
 event("carved pinocchio",1).
 event("wished pinocchio to be a real boy",2).
 event("fullfilled gepetto's wish",3).
 event("nose grows","pinocchio lies"). % how to know when he lies?
-event("promises to be a good boy from the next time","pinocchio lies"). 
-event("left the school",5).
-event("joins a circus",6).
-event("missed gepetto",7).
-event("swallow gepetto",8).
-event("heard gepetto was swallowed by a whale",9).
-event("found the whale",10).
-event("swallow pinocchio",11).
-event("make a plan",12).
-event("tickle the whale's belly",13).
-event("opened his mouth and snezeed",14).
-event("slipped out of the whale",15).
-event("reached home safely",16).
-event("turned pinocchio into a real boy",17).
-event("never missed school again",18). %how to represent from now on?
+event("promises to be a good boy from the next time","pinocchio lies").
+event("act2", 5).
+event("left the school",6).
+event("joins a circus",7).
+event("missed gepetto",8).
+event("swallow gepetto",9).
+event("act3", 10).
+event("heard gepetto was swallowed by a whale",11).
+event("found the whale",12).
+event("swallow pinocchio",12).
+event("make a plan",13).
+event("tickle the whale's belly",14).
+event("opened his mouth and snezeed",15).
+event("act4", 16).
+event("slipped out of the whale",17).
+event("reached home safely",18).
+event("turned pinocchio into a real boy",19).
+event("never missed school again",20). %how to represent from now on?
 
 % Event Modifiers
 % who(who,what)
