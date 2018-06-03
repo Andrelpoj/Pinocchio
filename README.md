@@ -17,10 +17,6 @@
   Para iniciar os dados:
 
     ?- consult('pinocchio.pl').
-  
-  Para carregar as regras relacionadas ao tratamento de tempo:
-    
-    ?- consult('pinocchio_time.pl').
 
 ## Integrantes do Grupo
     - Alysson Gomes
