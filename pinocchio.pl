@@ -19,10 +19,7 @@ naughty(pinocchio).
 liar(pinocchio).
 
 % Attributes that may change value over time
-alive(gepetto, T):- true, T > 0, !.
-alive(pinocchio, T) :- event("fullfilled gepetto's wish", X), X < T, !.
-happy(gepetto).
-happy(pinocchio).
+
 pleased(fairy).
 real_boy(pinocchio).
 good_boy(pinocchio).
@@ -137,27 +134,50 @@ happy(gepetto, T):-     (
                         bigger(T, 12).
 inside_whale(pinocchio, T):-    (
                                     time_constants(T, X), 
-                                    bigger(X, 11), 
-                                    smaller(X,17)
+                                    bigger_equal(X, 12), 
+                                    smaller_equal(X,18)
                                 ); 
                                 (
-                                    bigger(T, 11),
-                                    smaller(T,17)
+                                    bigger_equal(T, 12),
+                                    smaller_equal(T,18)
                                 ).
 inside_whale(gepetto, T):-  (
                                 time_constants(T, X), 
-                                bigger(X, 8), 
-                                smaller(X,17)
+                                bigger_equal(X, 9), 
+                                smaller_equal(X,18)
                             ); 
                             (
-                                bigger(T, 8), 
-                                smaller(T,17)
+                                bigger_equal(T, 9), 
+                                smaller_equal(T,18)
                             ).
+alive(gepetto, T):- (
+                        time_constants(T, X),
+                        bigger_equal(X, 0)
+                    );
+                    bigger_equal(T, 0).
+alive(pinocchio, T) :-  (
+                            time_constants(T, X),
+                            bigger_equal(X, 3)
+                        );
+                        bigger_equal(T, 3).
+% SERIA MELHOR ASSIM?
+% alive(pinocchio, T) :-  event("fullfilled gepetto's wish", V),
+%                         (
+%                             
+%                            (
+%                                time_constants(T, X),
+%                                bigger_equal(X, V)
+%                            );
+%                            bigger_equal(T, V)
+%                         ).
+
 
 % Comparison rules
 % bigger and smaller only accept numbers. If not number return false.
 bigger(X, Y):- number(X), number(Y), X > Y.
+bigger_equal(X, Y):- number(X), number(Y), X >= Y.
 smaller(X, Y):- number(X), number(Y), X < Y.
+smaller_equal(X, Y):- number(X), number(Y), X =< Y.
 equal(X, Y):- X = Y.
 
 % Time constants
