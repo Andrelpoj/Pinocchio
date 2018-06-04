@@ -15,14 +15,7 @@ man(pinocchio).
 woman(fairy).
 wish(gepetto,"pinocchio to be a real boy").
 wish("if pinocchio was to be a real boy he must always be a good boy").
-naughty(pinocchio).
 liar(pinocchio).
-
-% Attributes that may change value over time
-
-pleased(fairy).
-real_boy(pinocchio).
-good_boy(pinocchio).
 
 % Relations:
 % rel(entity1,entity2).
@@ -123,17 +116,17 @@ want(X,Y):- wish(X, Y).
 % Time related rules
 % happy(who, when)
 happy(pinocchio, T):-   (
-                            time_constants(T, X), 
+                            get_time(T, X), 
                             bigger(X, 12)
                         ); 
                         bigger(T, 12).
 happy(gepetto, T):-     (
-                            time_constants(T, X), 
+                            get_time(T, X), 
                             bigger(X, 12)
                         ); 
                         bigger(T, 12).
 inside_whale(pinocchio, T):-    (
-                                    time_constants(T, X), 
+                                    get_time(T, X), 
                                     bigger_equal(X, 12), 
                                     smaller_equal(X,18)
                                 ); 
@@ -142,7 +135,7 @@ inside_whale(pinocchio, T):-    (
                                     smaller_equal(T,18)
                                 ).
 inside_whale(gepetto, T):-  (
-                                time_constants(T, X), 
+                                get_time(T, X), 
                                 bigger_equal(X, 9), 
                                 smaller_equal(X,18)
                             ); 
@@ -151,12 +144,12 @@ inside_whale(gepetto, T):-  (
                                 smaller_equal(T,18)
                             ).
 alive(gepetto, T):- (
-                        time_constants(T, X),
+                        get_time(T, X),
                         bigger_equal(X, 0)
                     );
                     bigger_equal(T, 0).
 alive(pinocchio, T) :-  (
-                            time_constants(T, X),
+                            get_time(T, X),
                             bigger_equal(X, 3)
                         );
                         bigger_equal(T, 3).
@@ -165,12 +158,27 @@ alive(pinocchio, T) :-  (
 %                         (
 %                             
 %                            (
-%                                time_constants(T, X),
+%                                get_time(T, X),
 %                                bigger_equal(X, V)
 %                            );
 %                            bigger_equal(T, V)
 %                         ).
-
+pleased(fairy, T):- (
+                        get_time(T, X),
+                        bigger(X, 18)
+                    );
+                    bigger(T, 18).
+real_boy(pinocchio, T):-(
+                            get_time(T, X),
+                            bigger_equal(X, 19)
+                        );
+                        bigger_equal(T, 19).
+good_boy(pinocchio, T):-(
+                            get_time(T, X),
+                            bigger_equal(X, 20)
+                        );
+                        bigger_equal(T, 20).
+naughty(pinocchio, T):- not(good_boy(pinocchio, T)).
 
 % Comparison rules
 % bigger and smaller only accept numbers. If not number return false.
@@ -184,8 +192,8 @@ equal(X, Y):- X = Y.
 beginning_(3).
 middle_(15).
 end_(20).
-% time_constants(period, variable)
+% get_time(period, variable)
 % the variable will me used to store the constant
-time_constants(T, X):- (equal(T, "beginning"), beginning_(X)); 
+get_time(T, X):- (equal(T, "beginning"), beginning_(X)); 
                        (equal(T, "middle"), middle_(X)); 
                        (equal(T, "end"), end_(X)).
