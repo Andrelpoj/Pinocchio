@@ -27,64 +27,67 @@ love(gepetto,pinocchio).
 % event(what, when)
 % The story is a sequence of events.
 event("act1", 0).
-event("carved pinocchio",1).
-event("wished pinocchio to be a real boy",2).
-event("fullfilled gepetto's wish",3).
+event("carved",1).
+event("wished to be a real boy",2).
+event("fullfilled ",3).
 event("nose grows","pinocchio lies"). % como saber quando ele mente?
-event("promises to be a good boy from the next time","pinocchio lies").
+event("promises to be a good boy","pinocchio lies").
 event("act2", 5).
-event("left the school",6).
-event("joins a circus",7).
-event("missed gepetto",8).
+event("left",6).
+event("joins",7).
+event("missed",8).
 event("swallow gepetto",9).
 event("act3", 10).
-event("heard gepetto was swallowed by a whale",11).
-event("found the whale",12).
+event("heard",11).
+event("found",12).
 event("swallow pinocchio",12).
 event("make a plan",13).
-event("tickle the whale's belly",14).
+event("tickle",14).
 event("opened his mouth and snezeed",15).
 event("act4", 16).
-event("slips out of the whale", 17).
-event("reached home safely",18).
-event("turned pinocchio into a real boy",19).
-event("never missed school again",20). %how to represent from now on?
+event("slips out of", 17).
+event("reached",18).
+event("turned into a real boy",19).
+event("never missed again",20). %how to represent from now on?
 
 % Event Modifiers
 % who(who,what)
-who(gepetto,"carved pinocchio").
-who(gepetto,"wished pinocchio to be a real boy").
-who(fairy,"fullfilled gepetto's wish").
+who(gepetto,"carved").
+who(gepetto,"wished to be a real boy").
+who(fairy,"fullfilled").
 who(pinocchio,"nose grows").
-who(pinocchio,"promised to be a good boy from the next time"). 
-who(pinocchio,"left the school").
-who(pinocchio,"joins a circus").
+who(pinocchio,"promised to be a good boy"). 
+who(pinocchio,"left").
+who(pinocchio,"joins").
 who("pinocchio's friends", "joins a circus").
 who(pinocchio,"missed gepetto").
+who(whale,"swallow").
 who(whale,"swallow gepetto").
-who(pinocchio,"heard gepetto was swallowed by a whale").
-who(pinocchio,"found the whale").
+who(whale,"swallow pinocchio").
+who(pinocchio,"heard").
+who(pinocchio,"found").
 who(whale,"swallow pinocchio").
 who(gepetto,"make a plan").
 who(pinocchio,"make a plan").
-who(gepetto,"tickle the whale's belly").
-who(pinocchio,"tickle the whale's belly").
+who(gepetto,"tickle").
+who(pinocchio,"tickle").
 who(whale,"opened his mouth and snezeed").
-who(pinocchio,"slips out of the whale").
-who(gepetto,"slips out of the whale").
-who(gepetto,"reached home safely").
-who(pinocchio,"reached home safely").
-who(fairy,"turned pinocchio into a real boy").
-who(pinocchio,"never missed school again").
+who(pinocchio,"slipped out of").
+who(gepetto,"slipped out of").
+who(gepetto,"reached").
+who(pinocchio,"reached").
+who(fairy,"turned into a real boy").
+who(pinocchio,"never missed again").
 
-% where(where,what)
-where(school,"left the school").
-where(circus,"joins a circus").
-where(circus,"missed gepetto").
-where(whale,"found the whale").
+% where(where,what) 
+% Nao achei muito sentido nestas 5 clausulas abaixo, tem q revisar
+%where(school,"left").
+%where(circus,"joins a circus").
+%where(circus,"missed gepetto").
+%where(whale,"found the whale").
+%where("whale's belly","tickle the whale's belly").
 where("whale's belly","make a plan").
-where("whale's belly","tickle the whale's belly").
-where("whale's belly","slipped out of the whale").
+where("whale's belly","slipped out of").
 
 % how(how,what).
 how(safely,"reached home safely").
@@ -93,22 +96,38 @@ how(safely,"reached home safely").
 why("slips out of the whale", "tickle the whale's belly").
 
 % verb_object(object,what).
-verb_object(pinocchio,"carved pinocchio").
-verb_object(pinocchio,"wished pinocchio to be a real boy").
-verb_object("gepetto's wish","fullfilled gepetto's wish").
-verb_object(school,"left the school").
-verb_object(circus,"joins a circus").
-verb_object(gepetto,"missed gepetto").
-verb_object(gepetto,"swallow gepetto").
-verb_object("gepetto was swallowed by the whale","heard gepetto was swallowed by a whale").
-verb_object(whale,"found the whale").
-verb_object(pinocchio,"swallow pinocchio").
-verb_object("whale's belly","tickle the whale's belly").
-verb_object(whale,"slipped out of the whale").
-verb_object(home,"reached home").
-verb_object(pinocchio,"turned pinocchio in a real boy").
-verb_object(school,"never missed school again").
+verb_object(pinocchio,"carved").
+verb_object(pinocchio,"wished to be a real boy").
+verb_object("gepetto's wish","fullfilled").
+verb_object(school,"left").
+verb_object(circus,"joins").
+verb_object(gepetto,"missed").
+verb_object(gepetto,"swallow").
+verb_object("gepetto was swallowed","heard").
+verb_object(whale,"found").
+verb_object(pinocchio,"swallow").
+verb_object("whale's belly","tickle").
+verb_object(whale,"slipped out of").
+verb_object(home,"reached").
+verb_object(pinocchio,"turned into a real boy").
+verb_object(school,"never missed again").
 
+
+what(Who, Action, What) :- 
+    who(Who, Action), 
+    verb_object(What, Action),
+    !.
+
+who(Action, Object, Who) :-
+    verb_object(Object, Action),
+    who(Who, Action),
+    !.
+
+where(Agent, Action, Where) :-
+    who(Agent, Action),
+    where(Where, Action),
+    !.
+    
 % Rules
 boy(X):- man(X), age(X,young).
 trust(X):- not(liar(X)).
