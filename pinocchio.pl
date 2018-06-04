@@ -125,10 +125,34 @@ trust(X):- not(liar(X)).
 want(X,Y):- wish(X, Y).
 % Time related rules
 % happy(who, when)
-happy(pinocchio, T):- (time_constants(T, X), bigger(X, 12)); bigger(T, 12).
-happy(gepetto, T):- (time_constants(T, X), bigger(X, 12)); bigger(T, 12).
-inside_whale(pinocchio, T):- (time_constants(T, X), bigger(X, 11), smaller(X,17)); bigger(T, 11), smaller(T,17).
-inside_whale(gepetto, T):- (time_constants(T, X), bigger(X, 8), smaller(X,17)); bigger(T, 8), smaller(T,17).
+happy(pinocchio, T):-   (
+                            time_constants(T, X), 
+                            bigger(X, 12)
+                        ); 
+                        bigger(T, 12).
+happy(gepetto, T):-     (
+                            time_constants(T, X), 
+                            bigger(X, 12)
+                        ); 
+                        bigger(T, 12).
+inside_whale(pinocchio, T):-    (
+                                    time_constants(T, X), 
+                                    bigger(X, 11), 
+                                    smaller(X,17)
+                                ); 
+                                (
+                                    bigger(T, 11),
+                                    smaller(T,17)
+                                ).
+inside_whale(gepetto, T):-  (
+                                time_constants(T, X), 
+                                bigger(X, 8), 
+                                smaller(X,17)
+                            ); 
+                            (
+                                bigger(T, 8), 
+                                smaller(T,17)
+                            ).
 
 % Comparison rules
 % bigger and smaller only accept numbers. If not number return false.
