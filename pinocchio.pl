@@ -179,6 +179,16 @@ good_boy(pinocchio, T):-(
                         );
                         bigger_equal(T, 20).
 naughty(pinocchio, T):- not(good_boy(pinocchio, T)).
+works_circus(pinocchio, T):-(
+                                get_time(T, X),
+                                bigger_equal(X, 7),
+                                smaller_equal(X, 11)
+                            );
+                            (
+                                bigger_equal(T, 7),
+                                smaller_equal(T, 11)
+                            ).
+
 
 % Comparison rules
 % bigger and smaller only accept numbers. If not number return false.
