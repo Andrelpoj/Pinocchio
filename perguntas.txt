@@ -8,7 +8,7 @@ What did the carpenter *want*?                      | ?- occupation(X,carpenter)
 What did the fairy do?                              | ?- who(fairy,X).
 Is pinocchio a good boy?                            | ?- good_boy(pinocchio). 
 Is pinocchio trustworthy?                           | ?- trust(pinocchio).
-What happens when pinocchio lies?                   | ?- event(X,”pinocchio lies”)
+What happens when pinocchio lies?                   | ?- event(X,”pinocchio lies”).
 Where did pinocchio go?                             | ?- who(pinocchio,Y), where(X,Y).
 Where did pinocchio go with his friends?            | ?- who(pinocchio,Y), who("pinocchio's friends", Y), where(X,Y).
 What has the whale done to pinocchio?               | ?- who(whale,X), verb_object(pinocchio,X).
@@ -17,8 +17,9 @@ In the beginning, is pinocchio a good boy?          | ?- good_boy(pinocchio, X),
 In the beginning, is pinocchio trustworthy?         | ?- trust(pinocchio, X), beginning(X).
 In the end, is pinocchio a good boy?                | ?- good_boy(pinocchio, X), end(X).
 In the end, is pinocchio trustworthy?               | ?- trust(pinocchio, X), end(X).
-Were they happy in the beginning?                   | ?- happy(gepetto, beginning), happy(pinocchio, beginning)
-Did they lived happily after?                       | ?- happy(gepetto, end), happy(pinocchio, end)
+Were they happy in the beginning?                   | ?- happy(gepetto, beginning), happy(pinocchio, beginning).
+Did they lived happily after?                       | ?- happy(gepetto, end), happy(pinocchio, end).
 What happenned after pinocchio left school?         | ?- 
 Did the fairy made gepetto happy?
 What did gepetto and pinocchio do together?
+Is pinocchio inside the whale in the end?           | ?- inside_whale(pinocchio, "end").
