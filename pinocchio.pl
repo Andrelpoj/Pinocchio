@@ -119,7 +119,25 @@ verb_object(home,"reached home").
 verb_object(pinocchio,"turned pinocchio in a real boy").
 verb_object(school,"never missed school again").
 
-% Regras
+% Rules
 boy(X):- man(X), age(X,young).
 trust(X):- not(liar(X)).
 want(X,Y):- wish(X, Y).
+%happy(who, when)
+happy(pinocchio, T):- (time_constants(T, X), bigger(X, 12)); bigger(T, 12).
+
+% Comparison rules
+% bigger and smaller only accept numbers. If not number return false.
+bigger(X, Y):- number(X), number(Y), X > Y.
+smaller(X, Y):- number(X), number(Y), X < Y.
+equal(X, Y):- X = Y.
+
+% Time constants
+beginning_(3).
+middle_(15).
+end_(20).
+% time_constants(period, variable)
+% the variable will me used to store the constant
+time_constants(T, X):- (equal(T, "beginning"), beginning_(X)); 
+                       (equal(T, "middle"), middle_(X)); 
+                       (equal(T, "end"), end_(X)).
