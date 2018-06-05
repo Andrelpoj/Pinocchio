@@ -20,6 +20,9 @@ In the end, is pinocchio trustworthy?               | ?- trust(pinocchio, X), en
 Were they happy in the beginning?                   | ?- happy(gepetto, beginning), happy(pinocchio, beginning).
 Did they lived happily after?                       | ?- happy(gepetto, end), happy(pinocchio, end).
 What happenned after pinocchio left school?         | ?- 
-Did the fairy made gepetto happy?
-What did gepetto and pinocchio do together?
+Did the fairy made gepetto happy?                   | ?-
+What did gepetto and pinocchio do together?         | ?-  
 Is pinocchio inside the whale in the end?           | ?- inside_whale(pinocchio, "end").
+Where did gepetto make a plan?                      | ?- where(gepetto, "make a plan", L).
+What did the whale swallow?                         | ?- what(whale,"swallow", L).
+Who carved pinocchio?                               | ?- who("carved", pinocchio, L).
