@@ -19,7 +19,7 @@ In the end, is pinocchio a good boy?                | ?- good_boy(pinocchio, X),
 In the end, is pinocchio trustworthy?               | ?- trust(pinocchio, X), end(X).
 Were they happy in the beginning?                   | ?- happy(gepetto, beginning), happy(pinocchio, beginning).
 Did they lived happily after?                       | ?- happy(gepetto, end), happy(pinocchio, end).
-What happenned after pinocchio left school?         | ?- 
+What happenned after pinocchio left school?         | ?- event("left the school", X), next_event(X, T).
 Did the fairy made gepetto happy?                   | ?-
 What did gepetto and pinocchio do together?         | ?-  
 Is pinocchio inside the whale in the end?           | ?- inside_whale(pinocchio, "end").
