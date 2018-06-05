@@ -15,17 +15,7 @@ man(pinocchio).
 woman(fairy).
 wish(gepetto,"pinocchio to be a real boy").
 wish("if pinocchio was to be a real boy he must always be a good boy").
-naughty(pinocchio).
 liar(pinocchio).
-
-% Attributes that may change value over time
-alive(gepetto, T):- true, T > 0, !.
-alive(pinocchio, T) :- event("fullfilled gepetto's wish", X), X < T, !.
-happy(gepetto).
-happy(pinocchio).
-pleased(fairy).
-real_boy(pinocchio).
-good_boy(pinocchio).
 
 % Relations:
 % rel(entity1,entity2).
@@ -90,12 +80,12 @@ who(fairy,"turned into a real boy").
 who(pinocchio,"never missed again").
 
 % where(where,what) 
-% Nao achei muito sentido nestas 5 clausulas abaixo, tem q revisar
+% Nao achei muito sentido nestas 4 clausulas abaixo, tem q revisar
 %where(school,"left").
 %where(circus,"joins a circus").
-%where(circus,"missed gepetto").
 %where(whale,"found the whale").
 %where("whale's belly","tickle the whale's belly").
+where(circus,"missed gepetto").
 where("whale's belly","make a plan").
 where("whale's belly","slipped out of").
 
@@ -138,7 +128,101 @@ where(Agent, Action, Where) :-
     where(Where, Action),
     !.
     
-% Regras
+% Rules
 boy(X):- man(X), age(X,young).
 trust(X):- not(liar(X)).
 want(X,Y):- wish(X, Y).
+% Time related rules
+% happy(who, when)
+happy(pinocchio, T):-   (
+                            get_time(T, X), 
+                            bigger(X, 12)
+                        ); 
+                        bigger(T, 12).
+happy(gepetto, T):-     (
+                            get_time(T, X), 
+                            bigger(X, 12)
+                        ); 
+                        bigger(T, 12).
+inside_whale(pinocchio, T):-    (
+                                    get_time(T, X), 
+                                    bigger_equal(X, 12), 
+                                    smaller_equal(X,18)
+                                ); 
+                                (
+                                    bigger_equal(T, 12),
+                                    smaller_equal(T,18)
+                                ).
+inside_whale(gepetto, T):-  (
+                                get_time(T, X), 
+                                bigger_equal(X, 9), 
+                                smaller_equal(X,18)
+                            ); 
+                            (
+                                bigger_equal(T, 9), 
+                                smaller_equal(T,18)
+                            ).
+alive(gepetto, T):- (
+                        get_time(T, X),
+                        bigger_equal(X, 0)
+                    );
+                    bigger_equal(T, 0).
+alive(pinocchio, T) :-  (
+                            get_time(T, X),
+                            bigger_equal(X, 3)
+                        );
+                        bigger_equal(T, 3).
+% SERIA MELHOR ASSIM?
+% alive(pinocchio, T) :-  event("fullfilled gepetto's wish", V),
+%                         (
+%                             
+%                            (
+%                                get_time(T, X),
+%                                bigger_equal(X, V)
+%                            );
+%                            bigger_equal(T, V)
+%                         ).
+pleased(fairy, T):- (
+                        get_time(T, X),
+                        bigger(X, 18)
+                    );
+                    bigger(T, 18).
+real_boy(pinocchio, T):-(
+                            get_time(T, X),
+                            bigger_equal(X, 19)
+                        );
+                        bigger_equal(T, 19).
+good_boy(pinocchio, T):-(
+                            get_time(T, X),
+                            bigger_equal(X, 20)
+                        );
+                        bigger_equal(T, 20).
+naughty(pinocchio, T):- not(good_boy(pinocchio, T)).
+works_circus(pinocchio, T):-(
+                                get_time(T, X),
+                                bigger_equal(X, 7),
+                                smaller_equal(X, 11)
+                            );
+                            (
+                                bigger_equal(T, 7),
+                                smaller_equal(T, 11)
+                            ).
+
+
+% Comparison rules
+% bigger and smaller only accept numbers. If not number return false.
+bigger(X, Y):- number(X), number(Y), X > Y.
+bigger_equal(X, Y):- number(X), number(Y), X >= Y.
+smaller(X, Y):- number(X), number(Y), X < Y.
+smaller_equal(X, Y):- number(X), number(Y), X =< Y.
+equal(X, Y):- X = Y.
+
+% Time constants
+beginning_(3).
+middle_(15).
+end_(20).
+% get_time(period, variable)
+% the variable will me used to store the constant
+get_time(T, X):- (equal(T, "beginning"), beginning_(X)); 
+                       (equal(T, "middle"), middle_(X)); 
+                       (equal(T, "end"), end_(X)).
