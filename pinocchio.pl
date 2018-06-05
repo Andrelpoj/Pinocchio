@@ -80,12 +80,12 @@ who(fairy,"turned into a real boy").
 who(pinocchio,"never missed again").
 
 % where(where,what) 
-% Nao achei muito sentido nestas 5 clausulas abaixo, tem q revisar
+% Nao achei muito sentido nestas 4 clausulas abaixo, tem q revisar
 %where(school,"left").
 %where(circus,"joins a circus").
-%where(circus,"missed gepetto").
 %where(whale,"found the whale").
 %where("whale's belly","tickle the whale's belly").
+where(circus,"missed gepetto").
 where("whale's belly","make a plan").
 where("whale's belly","slipped out of").
 
