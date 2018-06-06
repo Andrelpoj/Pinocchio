@@ -266,6 +266,6 @@ middle_(15).
 end_(20).
 % get_time(period, variable)
 % the variable will me used to store the constant
-get_time(T, X):- (equal(T, beginning), beginning_(X)); 
-                       (equal(T, middle), middle_(X)); 
-                       (equal(T, end), end_(X)).
+get_time(T, X):- (equal(T, "beginning"), beginning_(X)); 
+                       (equal(T, "middle"), middle_(X)); 
+                       (equal(T, "end"), end_(X)).
