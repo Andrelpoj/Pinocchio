@@ -29,7 +29,7 @@ love(gepetto,pinocchio).
 event("act1", 0).
 event("carved",1).
 event("wished to be a real boy",2).
-event("fullfilled ",3).
+event("fullfilled",3).
 event("nose grows","pinocchio lies"). % como saber quando ele mente?
 event("promises to be a good boy","pinocchio lies").
 event("act2", 5).
@@ -134,79 +134,122 @@ trust(X):- not(liar(X)).
 want(X,Y):- wish(X, Y).
 % Time related rules
 % happy(who, when)
-happy(pinocchio, T):-   (
-                            get_time(T, X), 
-                            bigger(X, 12)
-                        ); 
-                        bigger(T, 12).
-happy(gepetto, T):-     (
-                            get_time(T, X), 
-                            bigger(X, 12)
-                        ); 
-                        bigger(T, 12).
-inside_whale(pinocchio, T):-    (
-                                    get_time(T, X), 
-                                    bigger_equal(X, 12), 
-                                    smaller_equal(X,18)
-                                ); 
-                                (
-                                    bigger_equal(T, 12),
-                                    smaller_equal(T,18)
-                                ).
-inside_whale(gepetto, T):-  (
-                                get_time(T, X), 
-                                bigger_equal(X, 9), 
-                                smaller_equal(X,18)
-                            ); 
-                            (
-                                bigger_equal(T, 9), 
-                                smaller_equal(T,18)
-                            ).
-alive(gepetto, T):- (
-                        get_time(T, X),
-                        bigger_equal(X, 0)
-                    );
-                    bigger_equal(T, 0).
-alive(pinocchio, T) :-  (
-                            get_time(T, X),
-                            bigger_equal(X, 3)
-                        );
-                        bigger_equal(T, 3).
-% SERIA MELHOR ASSIM?
-% alive(pinocchio, T) :-  event("fullfilled gepetto's wish", V),
-%                         (
-%                             
-%                            (
-%                                get_time(T, X),
-%                                bigger_equal(X, V)
-%                            );
-%                            bigger_equal(T, V)
-%                         ).
-pleased(fairy, T):- (
-                        get_time(T, X),
-                        bigger(X, 18)
-                    );
-                    bigger(T, 18).
-real_boy(pinocchio, T):-(
-                            get_time(T, X),
-                            bigger_equal(X, 19)
-                        );
-                        bigger_equal(T, 19).
-good_boy(pinocchio, T):-(
-                            get_time(T, X),
-                            bigger_equal(X, 20)
-                        );
-                        bigger_equal(T, 20).
+happy(pinocchio, T):-   
+    event("found", V),
+    (
+        (
+            get_time(T, X), 
+            bigger(X, V)
+        ); 
+        bigger(T, V)
+    ).
+
+happy(gepetto, T):- 
+    event("found", V),
+    (
+        (
+            get_time(T, X), 
+            bigger(X, V)
+        ); 
+        bigger(T, V)
+    ).
+
+inside_whale(pinocchio, T):-    
+    event("swallow pinocchio", V1),
+    event("slips out of", V2),
+    (
+        (
+            get_time(T, X), 
+            bigger_equal(X, V1), 
+            smaller_equal(X, V2)
+        ); 
+        (
+            bigger_equal(T, V1),
+            smaller_equal(T, V2)
+        )
+    ).
+
+inside_whale(gepetto, T):-  
+    event("swallow gepetto", V1),
+    event("slips out of", V2),
+    (
+        (
+            get_time(T, X), 
+            bigger_equal(X, V1), 
+            smaller_equal(X, V2)
+        ); 
+        (
+            bigger_equal(T, V1), 
+            smaller_equal(T, V2)
+        )
+    ).
+
+alive(gepetto, T):- 
+    event("act1", 0),
+    (
+        (
+            get_time(T, X),
+            bigger_equal(X, 0)
+        );
+        bigger_equal(T, 0)
+    ).
+
+alive(pinocchio, T) :-  
+    event("fullfilled", V),
+    (                         
+        (
+            get_time(T, X),
+            bigger_equal(X, V)
+        );
+        bigger_equal(T, V)
+    ).
+
+pleased(fairy, T):- 
+    event("reached",V),
+    (
+        (
+            get_time(T, X),
+            bigger(X, V)
+        );
+        bigger(T, V)
+    ).
+
+real_boy(pinocchio, T):-
+    event("turned into a real boy",V),
+    (
+        (
+            get_time(T, X),
+            bigger_equal(X, V)
+        );
+        bigger_equal(T, V)
+    ).
+
+good_boy(pinocchio, T):-
+    event("never missed again", V),
+    (
+        (
+            get_time(T, X),
+            bigger_equal(X, V)
+        );
+        bigger_equal(T, V)
+    ).
+
 naughty(pinocchio, T):- not(good_boy(pinocchio, T)).
-works_circus(pinocchio, T):-(
-                                get_time(T, X),
-                                bigger_equal(X, 7),
-                                smaller_equal(X, 11)
-                            );
-                            (
-                                bigger_equal(T, 7),
-                                smaller_equal(T, 11)
-                            ).
+
+works_circus(pinocchio, T):-
+    event("joins", V1),
+    event("heard", V2),
+    (
+        (
+            get_time(T, X),
+            bigger_equal(X, V1),
+            smaller_equal(X, V2)
+        );
+        (
+            bigger_equal(T, V1),
+            smaller_equal(T, V2)
+        )
+    ).
 
 
 % Comparison rules
