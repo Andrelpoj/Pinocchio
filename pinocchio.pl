@@ -30,7 +30,7 @@ event("act1", 0).
 event("carved",1).
 event("wished to be a real boy",2).
 event("fullfilled",3).
-event("nose grows","pinocchio lies"). % como saber quando ele mente?
+event("nose grows","pinocchio lies").
 event("promises to be a good boy","pinocchio lies").
 event("act2", 5).
 event("left",6).
@@ -48,7 +48,7 @@ event("act4", 16).
 event("slips out of", 17).
 event("reached",18).
 event("turned into a real boy",19).
-event("never missed again",20). %how to represent from now on?
+event("never missed again",20).
 
 % Event Modifiers
 % who(who,what)
@@ -134,6 +134,7 @@ trust(X):- not(liar(X)).
 want(X,Y):- wish(X, Y).
 % Time related rules
 % happy(who, when)
+% the event returns the exact moment that it happened
 happy(pinocchio, T):-   
     event("found", V),
     (
@@ -265,7 +266,7 @@ beginning_(3).
 middle_(15).
 end_(20).
 % get_time(period, variable)
-% the variable will me used to store the constant
+% the variable will be used to store the constant
 get_time(T, X):- (equal(T, "beginning"), beginning_(X)); 
                        (equal(T, "middle"), middle_(X)); 
                        (equal(T, "end"), end_(X)).
