@@ -59,7 +59,7 @@ who(pinocchio,"nose grows").
 who(pinocchio,"promises to be a good boy"). 
 who(pinocchio,"left").
 who(pinocchio,"joins").
-who("pinocchio's friends", "joins a circus").
+who("pinocchio's friends", "joins").
 who(pinocchio,"missed gepetto").
 who(whale,"swallow").
 who(whale,"swallow gepetto").
@@ -82,12 +82,12 @@ who(pinocchio,"never missed again").
 % where(where,what) 
 % Nao achei muito sentido nestas 4 clausulas abaixo, tem q revisar
 %where(school,"left").
-%where(circus,"joins a circus").
 %where(whale,"found the whale").
 %where("whale's belly","tickle the whale's belly").
-where(circus,"missed gepetto").
-where("whale's belly","make a plan").
-where("whale's belly","slipped out of").
+where(circus, "joins").
+where(circus, "missed gepetto").
+where("whale's belly", "make a plan").
+where("whale's belly", "slipped out of").
 
 % how(how,what).
 how(safely,"reached").
