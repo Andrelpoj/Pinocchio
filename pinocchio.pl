@@ -299,26 +299,26 @@ end_(20).
 % get_time(period, variable)
 % the variable will be used to store the constant
 get_time(T, X):- (equal(T, "beginning"), beginning_(X)); 
-                       (equal(T, "middle"), middle_(X)); 
-                       (equal(T, "end"), end_(X)).
+    (equal(T, "middle"), middle_(X)); 
+    (equal(T, "end"), end_(X)).
 
 % next_event(prev_event_indicator, next_event)
 % returns the event that comes after the event indicated by the period. 
 next_event(X, T) :-
-  Y is X + 1,
-  event(T, Y).
+    Y is X + 1,
+    event(T, Y).
 
 % has_verb_object(object, event)
 % returns the object if it exists, or the event if it does not.
 has_verb_object(O, E) :- verb_object(O, E), !.
-has_verb_object(O, E) :- event(E, _).
+has_verb_object(_, E) :- event(E, _).
 
 % has_how(how, event)
 % returns the manner in which an event happened, or the event if there is no how.
 has_how(H, E) :- how(H, E), !.
-has_how(H, E) :- event(E, _).
+has_how(_, E) :- event(E, _).
 
 % has_where(where, event)
 % returns the location of an event if there is one, or the event if there isn't.
 has_where(W, E) :- where(W, E), !.
-has_where(W, E) :- event(E, _).
+has_where(_, E) :- event(E, _).
