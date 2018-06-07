@@ -1,26 +1,26 @@
 % Perguntas
 
-Who was the carpenter?                              | ?- occupation(X,carpenter).
-Is pinocchio a boy?                                 | ?- boy(pinocchio, T).
-Is pinocchio a real boy?                            | ?- real_boy(pinocchio, T).
-Is pinocchio a puppet?                              | ?- puppet(pinocchio, T).
-What did the carpenter *want*?                      | ?- occupation(X,carpenter) , want(X).
-What did the fairy do?                              | ?- who(fairy,X).
-Is pinocchio a good boy?                            | ?- good_boy(pinocchio). 
-Is pinocchio trustworthy?                           | ?- trust(pinocchio).
-What happens when pinocchio lies?                   | ?- event(X,”pinocchio lies”).
-Where did pinocchio go?                             | ?- who(pinocchio,Y), where(X,Y).
-Where did pinocchio go with his friends?            | ?- who(pinocchio,Y), who("pinocchio's friends", Y), where(X,Y).
-What has the whale done to pinocchio?               | ?- who(whale,X), verb_object(pinocchio,X).
-How did Gepetto and Pinocchio manage to get out?    | ?- why("slips out of the whale", X), who(gepetto, X), who(pinocchio, X).
-In the beginning, is pinocchio a good boy?          | ?- good_boy(pinocchio, "beginning").
-In the end, is pinocchio a good boy?                | ?- good_boy(pinocchio, "end").
-Were they happy in the beginning?                   | ?- happy(gepetto, "beginning"), happy(pinocchio, "beginning").
-Did they lived happily after?                       | ?- happy(gepetto, "end"), happy(pinocchio, "end").
-What happenned after pinocchio left school?         | ?- 
-Did the fairy made gepetto happy?                   | ?-
-What did gepetto and pinocchio do together?         | ?-  
-Is pinocchio inside the whale in the end?           | ?- inside_whale(pinocchio, "end").
-Where did gepetto make a plan?                      | ?- where(gepetto, "make a plan", L).
+%Who was the carpenter?                              | ?- occupation(X, carpenter).
+%Is pinocchio a boy?                                 | ?- boy(pinocchio).
+%Is pinocchio a real boy?                            | ?- real_boy(pinocchio, T).
+%Is pinocchio a puppet?                              | ?- puppet(pinocchio, T).
+%Is pinocchio a good boy?                            | ?- good_boy(pinocchio). 
+%Is pinocchio trustworthy?                           | ?- trust(pinocchio).
+%Where did pinocchio go?                             | ?- who(pinocchio, Y), where(X, Y).
+%Were they happy in the beginning?                   | ?- happy(gepetto, "beginning"), happy(pinocchio, "beginning").
+%What happenned after pinocchio left school?         | ?- event("left", X), next_event(X, E), who(W, E), verb_object(P, E).
+%Did the fairy made gepetto happy?                   | ?- who(fairy, E), event(E, T), happy(gepetto, T).
+%What did gepetto and pinocchio do together?         | ?- who(gepetto, Event), who(pinocchio, Event), has_verb_object(What, Event), has_how(How, Event), has_where(Where, Event).
+%Where did gepetto make a plan?                      | ?- where(gepetto, "make a plan", L).
+What did the carpenter *want*?                      | ?- occupation(X, carpenter), want(X, Y).
+What did the fairy do?                              | ?- who(fairy, Event), verb_object(What, Event).
+What happens when pinocchio lies?                   | ?- event(X, ”pinocchio lies”).
+Where did pinocchio go with his friends?            | ?- who(pinocchio, Y), who("pinocchio's friends", Y), where(X, Y).
+What has the whale done to pinocchio?               | ?- who(whale, X), verb_object(pinocchio, X).
 What did the whale swallow?                         | ?- what(whale,"swallow", L).
 Who carved pinocchio?                               | ?- who("carved", pinocchio, L).
+How did Gepetto and Pinocchio manage to get out?    | ?- why("slipped out of the whale", X), who(gepetto, X), who(pinocchio, X).
+In the beginning, is pinocchio a good boy?          | ?- good_boy(pinocchio, "beginning").
+In the end, is pinocchio a good boy?                | ?- good_boy(pinocchio, "end").
+Is pinocchio inside the whale in the end?           | ?- inside_whale(pinocchio, "end").
+Did they lived happily after?                       | ?- happy(gepetto, "end"), happy(pinocchio, "end").

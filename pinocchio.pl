@@ -9,7 +9,7 @@ consult('pinocchio_time.pl').
 age(gepetto,old).
 age(pinocchio,young).
 occupation(gepetto,carpenter).
-puppet(pinocchio).
+puppet(pinocchio, T) :- not real_boy(pinocchio, T).
 man(gepetto).
 man(pinocchio).
 woman(fairy).
@@ -45,7 +45,7 @@ event("make a plan",13).
 event("tickle",14).
 event("opened his mouth and snezeed",15).
 event("act4", 16).
-event("slips out of", 17).
+event("slipped out of", 17).
 event("reached",18).
 event("turned into a real boy",19).
 event("never missed again",20).
@@ -56,7 +56,7 @@ who(gepetto,"carved").
 who(gepetto,"wished to be a real boy").
 who(fairy,"fullfilled").
 who(pinocchio,"nose grows").
-who(pinocchio,"promised to be a good boy"). 
+who(pinocchio,"promises to be a good boy"). 
 who(pinocchio,"left").
 who(pinocchio,"joins").
 who("pinocchio's friends", "joins a circus").
@@ -90,10 +90,10 @@ where("whale's belly","make a plan").
 where("whale's belly","slipped out of").
 
 % how(how,what).
-how(safely,"reached home safely").
+how(safely,"reached").
 
 % why(why,what).
-why("slips out of the whale", "tickle the whale's belly").
+why("slipped out of the whale", "tickle").
 
 % verb_object(object,what).
 verb_object(pinocchio,"carved").
@@ -157,7 +157,7 @@ happy(gepetto, T):-
 
 inside_whale(pinocchio, T):-    
     event("swallow pinocchio", V1),
-    event("slips out of", V2),
+    event("slipped out of", V2),
     (
         (
             get_time(T, X), 
@@ -172,7 +172,7 @@ inside_whale(pinocchio, T):-
 
 inside_whale(gepetto, T):-  
     event("swallow gepetto", V1),
-    event("slips out of", V2),
+    event("slipped out of", V2),
     (
         (
             get_time(T, X), 
@@ -270,3 +270,17 @@ end_(20).
 get_time(T, X):- (equal(T, "beginning"), beginning_(X)); 
                        (equal(T, "middle"), middle_(X)); 
                        (equal(T, "end"), end_(X)).
+
+% Utilities
+next_event(X, T) :-
+  Y is X + 1,
+  event(T, Y).
+
+has_verb_object(O, E) :- verb_object(O, E), !.
+has_verb_object(O, E) :- event(E, _).
+
+has_how(H, E) :- how(H, E), !.
+has_how(H, E) :- event(E, _).
+
+has_where(W, E) :- where(W, E), !.
+has_where(W, E) :- event(E, _).
