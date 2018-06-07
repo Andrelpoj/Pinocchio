@@ -79,11 +79,7 @@ who(pinocchio,"reached").
 who(fairy,"turned into a real boy").
 who(pinocchio,"never missed again").
 
-% where(where,what) 
-% Nao achei muito sentido nestas 4 clausulas abaixo, tem q revisar
-%where(school,"left").
-%where(whale,"found the whale").
-%where("whale's belly","tickle the whale's belly").
+% where(where,what)
 where(circus, "joins").
 where(circus, "missed gepetto").
 where("whale's belly", "make a plan").
@@ -131,8 +127,9 @@ where(Agent, Action, Where) :-
 boy(X):- man(X), age(X,young).
 trust(X):- not(liar(X)).
 want(X,Y):- wish(X, Y).
+
 % Time related rules
-% happy(who, when)
+% rule(who, when)
 % the event returns the exact moment that it happened
 happy(pinocchio, T):-   
     event("found", V),
@@ -260,26 +257,35 @@ smaller(X, Y):- number(X), number(Y), X < Y.
 smaller_equal(X, Y):- number(X), number(Y), X =< Y.
 equal(X, Y):- X = Y.
 
+% Utilities
 % Time constants
 beginning_(3).
 middle_(15).
 end_(20).
+
 % get_time(period, variable)
 % the variable will be used to store the constant
 get_time(T, X):- (equal(T, "beginning"), beginning_(X)); 
                        (equal(T, "middle"), middle_(X)); 
                        (equal(T, "end"), end_(X)).
 
-% Utilities
+% next_event(prev_event_indicator, next_event)
+% returns the event that comes after the event indicated by the period. 
 next_event(X, T) :-
   Y is X + 1,
   event(T, Y).
 
+% has_verb_object(object, event)
+% returns the object if it exists, or the event if it does not.
 has_verb_object(O, E) :- verb_object(O, E), !.
 has_verb_object(O, E) :- event(E, _).
 
+% has_how(how, event)
+% returns the manner in which an event happened, or the event if there is no how.
 has_how(H, E) :- how(H, E), !.
 has_how(H, E) :- event(E, _).
 
+% has_where(where, event)
+% returns the location of an event if there is one, or the event if there isn't.
 has_where(W, E) :- where(W, E), !.
 has_where(W, E) :- event(E, _).
