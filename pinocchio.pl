@@ -43,7 +43,7 @@ event("found",12).
 event("swallow pinocchio",12).
 event("make a plan",13).
 event("tickle",14).
-event("opened his mouth and snezeed",15).
+event("opened his mouth and sneezed",15).
 event("act4", 16).
 event("slipped out of", 17).
 event("reached",18).
@@ -71,7 +71,7 @@ who(gepetto,"make a plan").
 who(pinocchio,"make a plan").
 who(gepetto,"tickle").
 who(pinocchio,"tickle").
-who(whale,"opened his mouth and snezeed").
+who(whale,"opened his mouth and sneezed").
 who(pinocchio,"slipped out of").
 who(gepetto,"slipped out of").
 who(gepetto,"reached").
