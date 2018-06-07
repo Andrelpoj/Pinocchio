@@ -1,5 +1,3 @@
-consult('pinocchio_time.pl').
-
 % Facts
 % Entities: pinocchio, gepetto, fairy... 
 
@@ -9,7 +7,7 @@ consult('pinocchio_time.pl').
 age(gepetto,old).
 age(pinocchio,young).
 occupation(gepetto,carpenter).
-puppet(pinocchio).
+puppet(pinocchio, T) :- not(real_boy(pinocchio, T)).
 man(gepetto).
 man(pinocchio).
 woman(fairy).
@@ -43,9 +41,9 @@ event("found",12).
 event("swallow pinocchio",12).
 event("make a plan",13).
 event("tickle",14).
-event("opened his mouth and snezeed",15).
+event("opened his mouth and sneezed",15).
 event("act4", 16).
-event("slips out of", 17).
+event("slipped out of", 17).
 event("reached",18).
 event("turned into a real boy",19).
 event("never missed again",20).
@@ -56,10 +54,10 @@ who(gepetto,"carved").
 who(gepetto,"wished to be a real boy").
 who(fairy,"fullfilled").
 who(pinocchio,"nose grows").
-who(pinocchio,"promised to be a good boy"). 
+who(pinocchio,"promises to be a good boy"). 
 who(pinocchio,"left").
 who(pinocchio,"joins").
-who("pinocchio's friends", "joins a circus").
+who("pinocchio's friends", "joins").
 who(pinocchio,"missed gepetto").
 who(whale,"swallow").
 who(whale,"swallow gepetto").
@@ -71,7 +69,7 @@ who(gepetto,"make a plan").
 who(pinocchio,"make a plan").
 who(gepetto,"tickle").
 who(pinocchio,"tickle").
-who(whale,"opened his mouth and snezeed").
+who(whale,"opened his mouth and sneezed").
 who(pinocchio,"slipped out of").
 who(gepetto,"slipped out of").
 who(gepetto,"reached").
@@ -79,21 +77,17 @@ who(pinocchio,"reached").
 who(fairy,"turned into a real boy").
 who(pinocchio,"never missed again").
 
-% where(where,what) 
-% Nao achei muito sentido nestas 4 clausulas abaixo, tem q revisar
-%where(school,"left").
-%where(circus,"joins a circus").
-%where(whale,"found the whale").
-%where("whale's belly","tickle the whale's belly").
-where(circus,"missed gepetto").
-where("whale's belly","make a plan").
-where("whale's belly","slipped out of").
+% where(where,what)
+where(circus, "joins").
+where(circus, "missed gepetto").
+where("whale's belly", "make a plan").
+where("whale's belly", "slipped out of").
 
 % how(how,what).
-how(safely,"reached home safely").
+how(safely,"reached").
 
 % why(why,what).
-why("slips out of the whale", "tickle the whale's belly").
+why("slipped out of the whale", "tickle").
 
 % verb_object(object,what).
 verb_object(pinocchio,"carved").
@@ -115,8 +109,7 @@ verb_object(school,"never missed again").
 
 what(Who, Action, What) :- 
     who(Who, Action), 
-    verb_object(What, Action),
-    !.
+    verb_object(What, Action).
 
 who(Action, Object, Who) :-
     verb_object(Object, Action),
@@ -132,8 +125,9 @@ where(Agent, Action, Where) :-
 boy(X):- man(X), age(X,young).
 trust(X):- not(liar(X)).
 want(X,Y):- wish(X, Y).
+
 % Time related rules
-% happy(who, when)
+% rule(who, when)
 % the event returns the exact moment that it happened
 happy(pinocchio, T):-   
     event("found", V),
@@ -157,7 +151,7 @@ happy(gepetto, T):-
 
 inside_whale(pinocchio, T):-    
     event("swallow pinocchio", V1),
-    event("slips out of", V2),
+    event("slipped out of", V2),
     (
         (
             get_time(T, X), 
@@ -172,7 +166,7 @@ inside_whale(pinocchio, T):-
 
 inside_whale(gepetto, T):-  
     event("swallow gepetto", V1),
-    event("slips out of", V2),
+    event("slipped out of", V2),
     (
         (
             get_time(T, X), 
@@ -252,6 +246,41 @@ works_circus(pinocchio, T):-
         )
     ).
 
+before(X, Y) :- 
+    event(X, A),
+    event(Y, B),
+    A < B,
+    !.
+
+after(X, Y) :- 
+    event(X, A),
+    event(Y, B),
+    A > B,
+    !.
+
+beginning(X) :- 
+    (
+    	after(X, "act1"), 
+     	before(X, "act2"),
+        !
+    );
+    event(X, 0), !.
+
+middle(X) :- 
+    (
+    	after(X, "act2"), 
+     	before(X, "act4"),
+        !
+    );
+    event(X, 0), !.
+
+end(X) :- 
+    (
+    	after(X, "act4"),
+        !
+    );
+    event(X, 0), !.
+
 
 % Comparison rules
 % bigger and smaller only accept numbers. If not number return false.
@@ -261,12 +290,35 @@ smaller(X, Y):- number(X), number(Y), X < Y.
 smaller_equal(X, Y):- number(X), number(Y), X =< Y.
 equal(X, Y):- X = Y.
 
+% Utilities
 % Time constants
 beginning_(3).
 middle_(15).
 end_(20).
+
 % get_time(period, variable)
 % the variable will be used to store the constant
 get_time(T, X):- (equal(T, "beginning"), beginning_(X)); 
-                       (equal(T, "middle"), middle_(X)); 
-                       (equal(T, "end"), end_(X)).
+    (equal(T, "middle"), middle_(X)); 
+    (equal(T, "end"), end_(X)).
+
+% next_event(prev_event_indicator, next_event)
+% returns the event that comes after the event indicated by the period. 
+next_event(X, T) :-
+    Y is X + 1,
+    event(T, Y).
+
+% has_verb_object(object, event)
+% returns the object if it exists, or the event if it does not.
+has_verb_object(O, E) :- verb_object(O, E), !.
+has_verb_object(_, E) :- event(E, _).
+
+% has_how(how, event)
+% returns the manner in which an event happened, or the event if there is no how.
+has_how(H, E) :- how(H, E), !.
+has_how(_, E) :- event(E, _).
+
+% has_where(where, event)
+% returns the location of an event if there is one, or the event if there isn't.
+has_where(W, E) :- where(W, E), !.
+has_where(_, E) :- event(E, _).
