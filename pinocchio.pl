@@ -9,7 +9,7 @@ consult('pinocchio_time.pl').
 age(gepetto,old).
 age(pinocchio,young).
 occupation(gepetto,carpenter).
-puppet(pinocchio, T) :- not real_boy(pinocchio, T).
+puppet(pinocchio, T) :- not(real_boy(pinocchio, T)).
 man(gepetto).
 man(pinocchio).
 woman(fairy).
