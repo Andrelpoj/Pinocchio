@@ -17,7 +17,7 @@ What did the fairy do?                              | ?- who(fairy, Event), verb
 What happens when pinocchio lies?                   | ?- event(X, "pinocchio lies").
 Where did pinocchio go with his friends?            | ?- who(pinocchio, Event), who("pinocchio's friends", Event), where(Where, Event).
 What has the whale done to pinocchio?               | ?- who(whale, Event), verb_object(pinocchio, Event).
-*What did the whale swallow?                        | ?- what(whale,"swallow", L).
+*What did the whale swallow?                        | ?- what(whale,"swallow", What).
 Who carved pinocchio?                               | ?- who("carved", pinocchio, Who).
 How did Gepetto and Pinocchio manage to get out?    | ?- why("slipped out of the whale", Event), who(gepetto, Event), who(pinocchio, Event), verb_object(What, Event).
 In the beginning, is pinocchio a good boy?          | ?- good_boy(pinocchio, "beginning").

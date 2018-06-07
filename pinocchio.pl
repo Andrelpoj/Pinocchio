@@ -115,8 +115,7 @@ verb_object(school,"never missed again").
 
 what(Who, Action, What) :- 
     who(Who, Action), 
-    verb_object(What, Action),
-    !.
+    verb_object(What, Action).
 
 who(Action, Object, Who) :-
     verb_object(Object, Action),
