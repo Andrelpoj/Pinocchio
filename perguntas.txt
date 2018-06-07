@@ -10,6 +10,7 @@ How did Gepetto and Pinocchio manage to get out?    | ?- why("slipped out of the
 In the beginning, is pinocchio a good boy?          | ?- good_boy(pinocchio, "beginning").
 In the end, is pinocchio a good boy?                | ?- good_boy(pinocchio, "end").
 Is pinocchio inside the whale in the end?           | ?- inside_whale(pinocchio, "end").
+Was gepetto swallowed before pinocchio?             | ?- before("swallow gepetto", "swallow pinocchio").
 Did they lived happily after?                       | ?- happy(gepetto, "end"), happy(pinocchio, "end").
 
 % Perguntas Adicionais

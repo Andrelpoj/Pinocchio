@@ -1,5 +1,3 @@
-consult('pinocchio_time.pl').
-
 % Facts
 % Entities: pinocchio, gepetto, fairy... 
 
@@ -247,6 +245,41 @@ works_circus(pinocchio, T):-
             smaller_equal(T, V2)
         )
     ).
+
+before(X, Y) :- 
+    event(X, A),
+    event(Y, B),
+    A < B,
+    !.
+
+after(X, Y) :- 
+    event(X, A),
+    event(Y, B),
+    A > B,
+    !.
+
+beginning(X) :- 
+    (
+    	after(X, "act1"), 
+     	before(X, "act2"),
+        !
+    );
+    event(X, 0), !.
+
+middle(X) :- 
+    (
+    	after(X, "act2"), 
+     	before(X, "act4"),
+        !
+    );
+    event(X, 0), !.
+
+end(X) :- 
+    (
+    	after(X, "act4"),
+        !
+    );
+    event(X, 0), !.
 
 
 % Comparison rules
