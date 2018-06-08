@@ -1,7 +1,5 @@
 % Perguntas
-What did the carpenter want?                        | ?- occupation(Who, carpenter), want(Who, What).
 What did the fairy do?                              | ?- who(fairy, Event), verb_object(What, Event).
-What happens when pinocchio lies?                   | ?- event(Event, "pinocchio lies").
 Where did pinocchio go with his friends?            | ?- who(pinocchio, Event), who("pinocchio's friends", Event), where(Where, Event).
 What has the whale done to pinocchio?               | ?- who(whale, Event), verb_object(pinocchio, Event).
 What did the whale swallow?                         | ?- what(whale,"swallow", What).
@@ -9,11 +7,13 @@ Who carved pinocchio?                               | ?- who("carved", pinocchio
 How did Gepetto and Pinocchio manage to get out?    | ?- why("slipped out of the whale", Event), who(gepetto, Event), who(pinocchio, Event), verb_object(What, Event).
 In the beginning, is pinocchio a good boy?          | ?- good_boy(pinocchio, "beginning").
 In the end, is pinocchio a good boy?                | ?- good_boy(pinocchio, "end").
-Is pinocchio inside the whale in the end?           | ?- inside_whale(pinocchio, "end").
 Was gepetto swallowed before pinocchio?             | ?- before("swallow gepetto", "swallow pinocchio").
 Did they lived happily after?                       | ?- happy(gepetto, "end"), happy(pinocchio, "end").
 
 % Perguntas Adicionais
+Is pinocchio inside the whale in the end?           | ?- inside_whale(pinocchio, "end").
+What happens when pinocchio lies?                   | ?- event(Event, "pinocchio lies").
+What did the carpenter want?                        | ?- occupation(Who, carpenter), want(Who, What).
 Who was the carpenter?                              | ?- occupation(X, carpenter).
 Is pinocchio a boy?                                 | ?- boy(pinocchio).
 In the beginning, is pinocchio a real boy?          | ?- real_boy(pinocchio, "beginning").
@@ -24,3 +24,4 @@ What happenned after pinocchio left school?         | ?- event("left", Time), ne
 When did the fairy make gepetto happy?              | ?- who(fairy, Event), event(Event, Time), happy(gepetto, Time).
 What did gepetto and pinocchio do together?         | ?- who(gepetto, Event), who(pinocchio, Event), has_verb_object(What, Event), has_how(How, Event), has_where(Where, Event).
 Where did gepetto make a plan?                      | ?- where(gepetto, "make a plan", Where).
+Is pinocchio inside the whale in the middle?           | ?- inside_whale(pinocchio, "middle").
